@@ -1,0 +1,5 @@
+flask==3.0.0
+langchain-core==0.1.0
+langchain-groq==0.1.0
+pillow==10.0.0
+pytesseract==0.3.11

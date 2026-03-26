@@ -1,0 +1,15 @@
+Patient Name: Sarah Thompson
+Age: 58
+Gender: Female
+
+Clinical History:
+Long-term smoker (20 years, quit 2 years ago). Recent complaints of a persistent morning cough and fatigue. History of Type 2 Diabetes managed with Metformin.
+
+Recent Lab & Test Results:
+- Spirometry: Reduced FEV1/FVC ratio suggesting mild obstruction.
+- Fasting Glucose: 110 mg/dL.
+- Heart Rate: 72 bpm (Stable).
+- Chest X-Ray: Increased lung markings consistent with early chronic bronchitis.
+
+Current Symptoms:
+Mild wheezing when climbing stairs. Patient also mentions feeling "low and unmotivated" recently, with disrupted sleep patterns.

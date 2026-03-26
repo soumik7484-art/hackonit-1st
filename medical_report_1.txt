@@ -1,0 +1,15 @@
+Patient Name: Michael Johnson
+Age: 45
+Gender: Male
+
+Clinical History:
+The patient reports recurring episodes of intense chest pain and heart palpitations over the last three months. He expresses a constant fear of a heart attack. Family history reveals a father with generalized anxiety disorder and a mother with hypertension.
+
+Recent Lab & Test Results:
+- ECG: Sinus tachycardia noted during episodes; otherwise normal.
+- Blood Pressure: 145/90 mmHg.
+- LDL Cholesterol: 130 mg/dL.
+- Oxygen Saturation: 98% at rest, drops slightly during hyperventilation.
+
+Current Symptoms:
+Shortness of breath, dizziness, and numbness in fingers during stressful meetings. Gastric reflux is also noted after meals.

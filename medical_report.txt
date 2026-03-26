@@ -1,0 +1,15 @@
+Patient Name: David Chen
+Age: 32
+Gender: Male
+
+Clinical History:
+Professional athlete presenting with unusual "heavy legs" and sudden fainting spells during high-intensity training. No significant family history of heart disease.
+
+Recent Lab & Test Results:
+- Hemoglobin: 11.2 g/dL (Low).
+- Ferritin: 15 ng/mL.
+- Echocardiogram: Normal ejection fraction, slight left ventricular hypertrophy (Athlete's Heart).
+- Iron Studies: Consistent with iron-deficiency anemia.
+
+Current Symptoms:
+Pallor, rapid heart rate upon standing, and occasional chest tightness. No psychological distress reported.
