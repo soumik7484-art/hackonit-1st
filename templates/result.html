@@ -49,11 +49,37 @@
             color: #666;
             font-style: italic;
         }
+        .audio-section {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .audio-section h3 {
+            margin-top: 0;
+            color: #1976D2;
+        }
+        .audio-player {
+            width: 100%;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Analysis Results</h1>
+        
+        <!-- Audio Player Section -->
+        <div class="audio-section">
+            <h3>🔊 Listen to Results</h3>
+            <p>Your medical analysis is being read aloud:</p>
+            <audio class="audio-player" controls autoplay>
+                <source src="{{ url_for('static', filename='output.mp3') }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        
         <div class="diagnosis">
             {{ diagnosis }}
         </div>
