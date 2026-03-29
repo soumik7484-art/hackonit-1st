@@ -4,7 +4,7 @@ A Flask-based web application that uses AI agents powered by LangChain and Groq 
 
 ## Features
 
-- Upload medical reports in .txt format
+- Upload medical reports in .txt, .jpg, .jpeg, .png, .bmp, or .tiff format
 - Multi-agent analysis using specialized AI agents:
   - Cardiologist: Focuses on cardiac issues
   - Psychologist: Focuses on mental health and anxiety
@@ -15,7 +15,11 @@ A Flask-based web application that uses AI agents powered by LangChain and Groq 
 ## Installation
 
 1. Clone or download the project files
-2. Install the required dependencies:
+2. Install Tesseract OCR engine (required for image processing):
+   - Download from: https://github.com/UB-Mannheim/tesseract/releases
+   - Install the Windows setup executable
+   - Ensure it's added to your system PATH or note the installation path
+3. Install the required Python dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -31,7 +35,7 @@ python app.py
 
 2. Open your web browser and navigate to `http://127.0.0.1:5000`
 
-3. Upload a medical report in .txt format
+3. Upload a medical report in .txt, .jpg, .jpeg, .png, .bmp, or .tiff format
 
 4. View the comprehensive analysis and consolidated diagnosis
 

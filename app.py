@@ -1,8 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for
 import os
 from werkzeug.utils import secure_filename
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from utils.agent import Cardiologist, Psychologist, Pulmonologist, MultiDisciplinaryTeam
+from utils.agent import StrictMedicalAnalyzer
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 print('Flask template_folder:', app.template_folder)
@@ -34,6 +33,8 @@ def extract_text_from_image(path):
 
     try:
         import pytesseract
+        # Set the tesseract command path
+        pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
     except ImportError:
         raise RuntimeError('pytesseract is required for image OCR. Install with: pip install pytesseract')
 
@@ -84,38 +85,49 @@ def index():
 
 def analyze_report(medical_report):
     try:
-        # Initialize the Specialized Agents
-        agents = {
-            "Cardiologist": Cardiologist(medical_report),
-            "Psychologist": Psychologist(medical_report),
-            "Pulmonologist": Pulmonologist(medical_report)
-        }
+        import json
+        analyzer = StrictMedicalAnalyzer(medical_report)
+        response = analyzer.run()
+        
+        # Parse the JSON response
+        try:
+            result = json.loads(response)
+            # Format the result for display
+            medicines_formatted = []
+            for med in result.get('medicines', []):
+                if isinstance(med, dict):
+                    name = med.get('name', 'Unknown')
+                    dosage = med.get('dosage', 'Not specified')
+                    duration = med.get('duration', 'Not specified')
+                    medicines_formatted.append(f"{name} - {dosage} for {duration}")
+                else:
+                    medicines_formatted.append(str(med))
+            
+            formatted_result = f"""
+Name: {result.get('name', 'Not mentioned')}
 
-        # Helper function to get response from an agent
-        def get_response(name, agent):
-            try:
-                response = agent.run()
-                return name, response
-            except Exception as e:
-                return name, f"Error from {name}: {str(e)}"
+Age: {result.get('age', 'Not mentioned')}
 
-        # Run agents concurrently to save time
-        responses = {}
-        with ThreadPoolExecutor() as executor:
-            futures = [executor.submit(get_response, name, agent) for name, agent in agents.items()]
-            for future in as_completed(futures):
-                name, response = future.result()
-                responses[name] = response
+Gender: {result.get('gender', 'Not mentioned')}
 
-        # Pass individual reports to the Multi-Disciplinary Team for final review
-        team_agent = MultiDisciplinaryTeam(
-            cardio_report=responses.get("Cardiologist"),
-            psych_report=responses.get("Psychologist"),
-            pulm_report=responses.get("Pulmonologist")
-        )
+Diagnosis: {result.get('diagnosis', 'Not mentioned')}
 
-        final_diagnosis = team_agent.run()
-        return final_diagnosis
+Symptoms: {', '.join(result.get('symptoms', [])) or 'Not mentioned'}
+
+Medicines: {'; '.join(medicines_formatted) or 'Not mentioned'}
+
+Report Advice: {', '.join(result.get('report_advice', [])) or 'Not mentioned'}
+
+AI Advice: {', '.join(result.get('ai_advice', [])) or 'Not mentioned'}
+
+Warnings: {', '.join(result.get('warnings', [])) or 'Not mentioned'}
+
+Summary: {result.get('summary', 'Not mentioned')}
+"""
+            
+            return formatted_result
+        except json.JSONDecodeError:
+            return f"Error parsing response: {response}"
     except Exception as e:
         return f"Error in analysis: {str(e)}"
 
